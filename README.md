@@ -96,6 +96,18 @@ class Article extends Block
 }
 ```
 
+### Using the make command
+
+You can use the `make:layout-builder-block` command to generate a new layout builder block.
+
+```bash
+php artisan make:layout-builder-block Article
+```
+
+This will generate a new layout builder block in the `app/View/Components/LayoutBuilder` directory: `app/View/Components/LayoutBuilder/Article.php`.
+
+And a new view in the `resources/views/components/layout-builder` directory: `resources/views/components/layout-builder/article.blade.php`.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

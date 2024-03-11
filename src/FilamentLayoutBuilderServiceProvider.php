@@ -2,6 +2,7 @@
 
 namespace Outerweb\FilamentLayoutBuilder;
 
+use Outerweb\FilamentLayoutBuilder\Console\Commands\LayoutBuilderBlockMakeCommand;
 use Outerweb\FilamentLayoutBuilder\View\Components;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -9,7 +10,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FilamentLayoutBuilderServiceProvider extends PackageServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function configurePackage(Package $package) : void
     {
         $package
             ->name('filament-layout-builder')
@@ -20,6 +21,9 @@ class FilamentLayoutBuilderServiceProvider extends PackageServiceProvider
                 Components\Container::class,
                 Components\Block::class,
             )
+            ->hasCommands([
+                LayoutBuilderBlockMakeCommand::class,
+            ])
             ->hasInstallCommand(function (InstallCommand $command) {
                 $composerFile = file_get_contents(__DIR__ . '/../composer.json');
 
