@@ -2,6 +2,12 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.2.0 - 2024-03-12
+
+### Fixed
+
+- Fixed issue where label was not being used.
+
 ## 1.1.1 - 2024-03-12
 
 ### Added

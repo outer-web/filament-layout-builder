@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class LayoutBuilder extends Builder
 {
-    protected function setUp(): void
+    protected function setUp() : void
     {
         parent::setUp();
 
@@ -21,13 +21,14 @@ class LayoutBuilder extends Builder
             ->cloneable();
     }
 
-    protected function configureBlocks(): self
+    protected function configureBlocks() : self
     {
         $blocks = $this->getUserDefinedBlocks()
             ->map(function (string $blockClassName) {
                 $class = new $blockClassName();
 
                 return Builder\Block::make($class->label())
+                    ->label($class->label())
                     ->icon($class->icon())
                     ->maxItems($class->maxItems())
                     ->schema([
@@ -41,7 +42,7 @@ class LayoutBuilder extends Builder
         return $this->blocks($blocks);
     }
 
-    protected function getUserDefinedBlocks(): Collection
+    protected function getUserDefinedBlocks() : Collection
     {
         $classes = collect(scandir(app_path('View/Components/LayoutBuilder')))
             ->filter(function (string $file) {
@@ -57,13 +58,13 @@ class LayoutBuilder extends Builder
         return $classes;
     }
 
-    public function getState(): mixed
+    public function getState() : mixed
     {
         $state = parent::getState();
 
         return collect($state)
             ->map(function ($block) {
-                if (!isset ($block['data']['layout-builder-block']['id']) || is_null($block['data']['layout-builder-block']['id'])) {
+                if (! isset ($block['data']['layout-builder-block']['id']) || is_null($block['data']['layout-builder-block']['id'])) {
                     $block['data']['layout-builder-block']['id'] = Str::uuid()->toString();
                 }
 
