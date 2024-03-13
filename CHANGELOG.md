@@ -2,6 +2,17 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.3.0 - 2024-03-13
+
+### Fixed
+
+- Fixed issue where saving the layout blocks would not work.
+- Fixed issue where blocks with translations would not get deleted completely.
+
+### Changed
+
+- Removed the blockNumbers.
+
 ## 1.2.0 - 2024-03-12
 
 ### Fixed

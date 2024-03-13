@@ -18,7 +18,15 @@ class LayoutBuilder extends Builder
             ->reorderableWithButtons()
             ->collapsible()
             ->collapsed()
-            ->cloneable();
+            ->cloneable()
+            ->blockNumbers(false)
+            ->mutateDehydratedStateUsing(static function (?array $state) : array {
+                return collect(array_values($state) ?? [])
+                    ->filter(function ($block) {
+                        return isset ($block['data']['layout-builder-block']['id']);
+                    })
+                    ->toArray();
+            });
     }
 
     protected function configureBlocks() : self
@@ -27,14 +35,14 @@ class LayoutBuilder extends Builder
             ->map(function (string $blockClassName) {
                 $class = new $blockClassName();
 
-                return Builder\Block::make($class->label())
+                return Builder\Block::make($class::class)
                     ->label($class->label())
                     ->icon($class->icon())
                     ->maxItems($class->maxItems())
                     ->schema([
                         Hidden::make('layout-builder-block.id')
-                            ->required(),
-                        ...$class->schema()
+                            ->default(Str::uuid()->toString()),
+                        ...$class->schema(),
                     ]);
             })
             ->toArray();
@@ -60,16 +68,6 @@ class LayoutBuilder extends Builder
 
     public function getState() : mixed
     {
-        $state = parent::getState();
-
-        return collect($state)
-            ->map(function ($block) {
-                if (! isset ($block['data']['layout-builder-block']['id']) || is_null($block['data']['layout-builder-block']['id'])) {
-                    $block['data']['layout-builder-block']['id'] = Str::uuid()->toString();
-                }
-
-                return $block;
-            })
-            ->toArray();
+        return parent::getState();
     }
 }
