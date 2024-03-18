@@ -2,6 +2,12 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.4.0 - 2024-03-18
+
+### Fixed
+
+- Fixed issues with blade component `container` not being able to render the blocks.
+
 ## 1.3.0 - 2024-03-13
 
 ### Fixed

@@ -4,22 +4,35 @@ namespace Outerweb\FilamentLayoutBuilder\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class Container extends Component
 {
-    public function __construct(public ?array $blocks)
+    public function __construct(public array|string|Collection $blocks)
     {
         $this->configureBlocks();
     }
 
-    public function render(): View|Closure|string
+    public function render() : View|Closure|string
     {
         return view('filament-layout-builder::components.container');
     }
 
-    protected function configureBlocks(): void
+    protected function configureBlocks() : void
     {
+        if (is_string($this->blocks)) {
+            $this->blocks = json_decode($this->blocks, true);
+        }
+
+        if ($this->blocks instanceof Collection) {
+            $this->blocks = $this->blocks->toArray();
+        }
+
+        if (is_null($this->blocks)) {
+            $this->blocks = [];
+        }
+
         $this->blocks = collect($this->blocks)
             ->map(function (mixed $block, int $index) {
                 if ($block instanceof Block) {
@@ -30,19 +43,19 @@ class Container extends Component
                     $block = json_decode($block, true);
                 }
 
-                if (is_array($block)) {
-                    $componentName = $block['type'];
-                    $component = "\\App\\View\\Components\\LayoutBuilder\\{$componentName}";
 
-                    if (!class_exists($component)) {
+                if (is_array($block)) {
+                    $component = $block['type'];
+
+                    if (! class_exists($component)) {
                         return null;
                     }
 
-                    $typeIndex = collect($this->blocks)->where('type', $componentName)->count() - 1;
+                    $typeIndex = collect($this->blocks)->where('type', $component)->count() - 1;
 
                     return new $component(
                         data: $block['data'],
-                        type: $componentName,
+                        type: $component,
                         index: $index,
                         typeIndex: $typeIndex,
                     );
