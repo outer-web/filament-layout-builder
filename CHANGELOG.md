@@ -2,6 +2,12 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.5.0 - 2024-03-19
+
+### Fixed
+
+- Fixed issue with `type_index` in the block data.
+
 ## 1.4.0 - 2024-03-18
 
 ### Fixed

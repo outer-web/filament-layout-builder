@@ -51,7 +51,9 @@ class Container extends Component
                         return null;
                     }
 
-                    $typeIndex = collect($this->blocks)->where('type', $component)->count() - 1;
+                    $typeIndex = collect($this->blocks)
+                        ->take($index)
+                        ->where('type', $component)->count();
 
                     return new $component(
                         data: $block['data'],
