@@ -2,6 +2,12 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.6.0 - 2024-03-24
+
+### Fixed
+
+- Fixed issue where passing a `null` value to the `container` blade component would throw an error.
+
 ## 1.5.0 - 2024-03-19
 
 ### Fixed

@@ -9,7 +9,7 @@ use Illuminate\View\Component;
 
 class Container extends Component
 {
-    public function __construct(public array|string|Collection $blocks)
+    public function __construct(public array|string|Collection|null $blocks)
     {
         $this->configureBlocks();
     }
