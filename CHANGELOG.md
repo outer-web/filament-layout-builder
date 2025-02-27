@@ -2,6 +2,12 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.7.0 - 2025-02-27
+
+### Added
+
+- Added support for Laravel 12.
+
 ## 1.6.0 - 2024-03-24
 
 ### Fixed

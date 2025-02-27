@@ -1,38 +1,38 @@
 {
-    "name": "outerweb/filament-layout-builder",
-    "description": "This package extends the filament builder field to work with predefined layout blocks to build the content of a page.",
-    "homepage": "https://github.com/outer-web/filament-layout-builder",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Outerweb",
-            "email": "info@outerweb.be"
-        }
-    ],
-    "require": {
-        "php": "^8.0",
-        "filament/filament": "^3.2",
-        "laravel/framework": "^10.0|^11.0",
-        "spatie/laravel-package-tools": "^1.16"
+  "name": "outerweb/filament-layout-builder",
+  "description": "This package extends the filament builder field to work with predefined layout blocks to build the content of a page.",
+  "homepage": "https://github.com/outer-web/filament-layout-builder",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Outerweb",
+      "email": "info@outerweb.be"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "filament/filament": "^3.2",
+    "laravel/framework": "^10.0|^11.0|^12.0",
+    "spatie/laravel-package-tools": "^1.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "Outerweb\\FilamentLayoutBuilder\\": "src/"
     },
-    "autoload": {
-        "psr-4": {
-            "Outerweb\\FilamentLayoutBuilder\\": "src/"
-        },
-        "files": [
-            "src\\Helpers\\helpers.php"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Outerweb\\FilamentLayoutBuilder\\FilamentLayoutBuilderServiceProvider"
-            ]
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "files": [
+      "src\\Helpers\\helpers.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Outerweb\\FilamentLayoutBuilder\\FilamentLayoutBuilderServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
