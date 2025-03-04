@@ -2,6 +2,12 @@
 
 All notable changes to `filament-layout-builder` will be documented in this file.
 
+## 1.8.0 - 2025-03-04
+
+### Fixed
+
+- Fixed issue with clone() action where the block id was not unique for the cloned block(s).
+
 ## 1.7.0 - 2025-02-27
 
 ### Added

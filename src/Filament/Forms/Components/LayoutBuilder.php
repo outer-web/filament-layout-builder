@@ -2,6 +2,7 @@
 
 namespace Outerweb\FilamentLayoutBuilder\Filament\Forms\Components;
 
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Hidden;
 use Illuminate\Support\Collection;
@@ -19,6 +20,28 @@ class LayoutBuilder extends Builder
             ->collapsible()
             ->collapsed()
             ->cloneable()
+            ->cloneAction(function (Action $action) {
+                return $action->action(function (array $arguments, Builder $component): void {
+                    $newUuid = $component->generateUuid();
+    
+                    $items = $component->getState();
+
+                    $newItem = $items[$arguments['item']];
+                    $newItem['data']['layout-builder-block']['id'] = Str::uuid()->toString();
+    
+                    if ($newUuid) {
+                        $items[$newUuid] = $newItem;
+                    } else {
+                        $items[] = $newItem;
+                    }
+    
+                    $component->state($items);
+    
+                    $component->collapsed(false, shouldMakeComponentCollapsible: false);
+    
+                    $component->callAfterStateUpdated();
+                });
+            })
             ->blockNumbers(false)
             ->mutateDehydratedStateUsing(static function (?array $state) : array {
                 return collect(array_values($state) ?? [])
