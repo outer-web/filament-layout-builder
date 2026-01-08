@@ -1,27 +1,14 @@
 <?php
 
-namespace VendorName\Skeleton;
+declare(strict_types=1);
+
+namespace Outerweb\FilamentLayoutBuilder;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class LayoutBuilderPlugin implements Plugin
 {
-    public function getId(): string
-    {
-        return 'skeleton';
-    }
-
-    public function register(Panel $panel): void
-    {
-        //
-    }
-
-    public function boot(Panel $panel): void
-    {
-        //
-    }
-
     public static function make(): static
     {
         return app(static::class);
@@ -34,4 +21,13 @@ class SkeletonPlugin implements Plugin
 
         return $plugin;
     }
+
+    public function getId(): string
+    {
+        return 'layout-builder';
+    }
+
+    public function register(Panel $panel): void {}
+
+    public function boot(Panel $panel): void {}
 }

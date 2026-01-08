@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\View\Components\LayoutBuilder;
+
+use Filament\Schemas\Schema;
+use Outerweb\FilamentLayoutBuilder\View\Components\Block;
+
+class {{ class }} extends Block
+{
+    protected string $view = 'components.layout-builder.{{ view }}';
+
+    public static function schema(Schema $schema): Schema
+    {
+        return $schema->components([
+
+        ]);
+    }
+
+    public function dehydrateData(): array
+    {
+        return $this->data;
+    }
+
+    public function formatData(): array
+    {
+        return $this->data;
+    }
+}

@@ -1,6 +1,8 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+declare(strict_types=1);
+
+namespace Outerweb\FilamentLayoutBuilder\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -15,8 +17,8 @@ use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Outerweb\FilamentLayoutBuilder\LayoutBuilderServiceProvider;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use VendorName\Skeleton\SkeletonServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -25,8 +27,18 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Outerweb\\FilamentLayoutBuilder\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+    }
+
+    public function getEnvironmentSetUp($app)
+    {
+        config()->set('database.default', 'testing');
+
+        /*
+        $migration = include __DIR__.'/../database/migrations/create_filament-layout-builder_table.php.stub';
+        $migration->up();
+        */
     }
 
     protected function getPackageProviders($app)
@@ -44,17 +56,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            SkeletonServiceProvider::class,
+            LayoutBuilderServiceProvider::class,
         ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        $migration->up();
-        */
     }
 }
